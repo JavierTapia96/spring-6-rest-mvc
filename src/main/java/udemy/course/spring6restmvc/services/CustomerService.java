@@ -1,6 +1,7 @@
 package udemy.course.spring6restmvc.services;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import udemy.course.spring6restmvc.model.Customer;
 
@@ -11,7 +12,7 @@ public interface CustomerService {
 
     List<Customer> listCustomers();
 
-    Customer getCustomerById(UUID id);
+    Optional<Customer> getCustomerById(UUID id);
 
     Customer saveNewCustomer(Customer customer);
 

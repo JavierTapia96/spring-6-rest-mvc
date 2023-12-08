@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import udemy.course.spring6restmvc.exception.NotFoundException;
 import udemy.course.spring6restmvc.model.Customer;
 import udemy.course.spring6restmvc.services.CustomerService;
 
@@ -75,6 +76,6 @@ public class CustomerController {
     @GetMapping(CUSTOMER_PATH_ID)
     public Customer getCustomerById(@PathVariable("id") UUID id) {
         log.debug("Getting customer by id - In controller...");
-        return customerService.getCustomerById(id);
+        return customerService.getCustomerById(id).orElseThrow(NotFoundException::new);
     }
 }

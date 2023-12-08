@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import udemy.course.spring6restmvc.exception.NotFoundException;
 import udemy.course.spring6restmvc.model.Beer;
 import udemy.course.spring6restmvc.services.BeerService;
 
@@ -74,6 +75,6 @@ public class BeerController {
     @GetMapping(BEER_PATH_ID)
     public Beer getBeerById(@PathVariable("id") UUID id) {
         log.debug("Getting a beer by id - In controller...");
-        return beerService.getBeerById(id);
+        return beerService.getBeerById(id).orElseThrow(NotFoundException::new);
     }
 }
