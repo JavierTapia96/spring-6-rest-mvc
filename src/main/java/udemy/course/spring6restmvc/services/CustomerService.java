@@ -3,22 +3,22 @@ package udemy.course.spring6restmvc.services;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import udemy.course.spring6restmvc.model.Customer;
+import udemy.course.spring6restmvc.model.CustomerDTO;
 
 /**
  * Created by Javier Tapia on 25/11/2023
  */
 public interface CustomerService {
 
-    List<Customer> listCustomers();
+    List<CustomerDTO> listCustomers();
 
-    Optional<Customer> getCustomerById(UUID id);
+    Optional<CustomerDTO> getCustomerById(UUID id);
 
-    Customer saveNewCustomer(Customer customer);
+    CustomerDTO saveNewCustomer(CustomerDTO customer);
 
-    void updateCustomerById(UUID id, Customer customer);
+    void updateCustomerById(UUID id, CustomerDTO customer);
 
     void deleteById(UUID id);
 
-    void patchCustomerById(UUID id, Customer customer);
+    void patchCustomerById(UUID id, CustomerDTO customer);
 }

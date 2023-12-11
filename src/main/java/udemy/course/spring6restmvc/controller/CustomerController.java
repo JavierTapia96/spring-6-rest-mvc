@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import udemy.course.spring6restmvc.exception.NotFoundException;
-import udemy.course.spring6restmvc.model.Customer;
+import udemy.course.spring6restmvc.model.CustomerDTO;
 import udemy.course.spring6restmvc.services.CustomerService;
 
 /**
@@ -34,7 +34,7 @@ public class CustomerController {
 
     @PatchMapping(CUSTOMER_PATH_ID)
     public ResponseEntity<?> updateCustomerPatchById(@PathVariable("id") UUID id,
-                                                     @RequestBody Customer customer) {
+                                                     @RequestBody CustomerDTO customer) {
         customerService.patchCustomerById(id, customer);
         log.debug("Patched customer with id: " + id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -49,15 +49,15 @@ public class CustomerController {
 
     @PutMapping(CUSTOMER_PATH_ID)
     public ResponseEntity<?> updateById(@PathVariable("id") UUID id,
-                                        @RequestBody Customer customer) {
+                                        @RequestBody CustomerDTO customer) {
         customerService.updateCustomerById(id, customer);
         log.debug("Updated customer with id: " + id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PostMapping(CUSTOMER_PATH)
-    public ResponseEntity<?> handlePost(@RequestBody Customer customer) {
-        Customer savedCustomer = customerService.saveNewCustomer(customer);
+    public ResponseEntity<?> handlePost(@RequestBody CustomerDTO customer) {
+        CustomerDTO savedCustomer = customerService.saveNewCustomer(customer);
 
         log.debug("Saved customer with id: " + savedCustomer.getId());
 
@@ -68,13 +68,13 @@ public class CustomerController {
     }
 
     @GetMapping(CUSTOMER_PATH)
-    public List<Customer> listCustomers() {
+    public List<CustomerDTO> listCustomers() {
         log.debug("Listing customers - In controller...");
         return customerService.listCustomers();
     }
 
     @GetMapping(CUSTOMER_PATH_ID)
-    public Customer getCustomerById(@PathVariable("id") UUID id) {
+    public CustomerDTO getCustomerById(@PathVariable("id") UUID id) {
         log.debug("Getting customer by id - In controller...");
         return customerService.getCustomerById(id).orElseThrow(NotFoundException::new);
     }
